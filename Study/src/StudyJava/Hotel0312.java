@@ -19,8 +19,10 @@ public class Hotel0312 {
 		Scanner sc = new Scanner(System.in);
 		int[] RoomNum = new int[10];
 		int[] Check = new int[10];
+		int count = 0;
 		
 		while(true) {
+
 		System.out.println("예약 현황");
 		for(int i = 0 ; i < RoomNum.length ; i++) {
 			RoomNum[i]=i+1;
@@ -31,6 +33,11 @@ public class Hotel0312 {
 		for(int i = 0 ; i < Check.length ; i++) {
 			System.out.print(Check[i] + "        ");
 			}
+			System.out.println();
+		if(count ==10){
+			System.out.println("모든 방이 예약되었습니다.");
+			break;
+		}
 		System.out.println();
 		System.out.print("몇 번 방을 예약하시겠습니까? >>> ");
 		int ans = sc.nextInt(); 
@@ -51,6 +58,7 @@ public class Hotel0312 {
 			case 10 : Check[ans-1]++; break;
 			}
 			System.out.println("예약이 완료 되었습니다." + " (선택한 방 : " + ans + "번방)" );
+			count++;
 		}
 		}
 	}
