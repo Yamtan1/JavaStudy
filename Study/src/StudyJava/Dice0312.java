@@ -22,7 +22,7 @@ public class Dice0312 {
 			}	
 		}
 		
-		for(int i = 0 ; i < table.length ; i++) {
+			for(int i = 0 ; i < table.length ; i++) {
 			System.out.println(table[i]);
 		}
 
