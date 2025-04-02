@@ -9,9 +9,13 @@ public class Ramen extends Food {
 		this.name = name;
 
 	}
-	void eat() {
-
-
+	void eat(){  //방법2
 
 	}
+
+	/* void eat(Person p) {  //방법 1
+
+		p.weight = p.weight + cal*0.001;
+		System.out.println(p.weight);
+	} */
 }

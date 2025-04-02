@@ -7,7 +7,7 @@ public class TteokgukTest {
 		Person p1 = new Person(20, "홍길동",90);
 		Tteokguk t1 = new Tteokguk();
 		Ramen r1 = new Ramen("신라면",456);
-		
+		Person p2 = new Person(20, "홍길순",80);
 		/* p1.eat(t1);
 		System.out.println(p1.age); */
 		
@@ -16,6 +16,7 @@ public class TteokgukTest {
 		//함수로 만들기
 		
 		p1.eatFood(t1);
+		p2.eatFood(r1);
 		p1.eatFood(r1);
 	}
 
