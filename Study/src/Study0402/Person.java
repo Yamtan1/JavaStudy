@@ -15,10 +15,12 @@ public class Person {
 	}
 	void eatFood(Food f) {
 		if(f instanceof Ramen){
-			((Ramen) f).eat(this);
+			Ramen r =(Ramen)f;
+			System.out.println("현재 몸무게 : " + (weight + r.cal*0.001));
 		}
 		else if (f instanceof Tteokguk) { // Tteokguk이면 메시지만 출력
-		((Tteokguk) f).eat();
+			Tteokguk t = (Tteokguk) f;
+			System.out.println(t.food + "을 먹습니다.");
 	}
 	}
 	

@@ -2,15 +2,16 @@ package Study0402;
 
 public class Ramen extends Food {
 	String name;
-
+	double cal;
 	
-	Ramen(String name,int cal){
-		super(cal);
+	Ramen(String name,double cal){
+		this.cal=cal;
 		this.name = name;
 
 	}
-	void eat(Person p) {
-		p.weight =p.weight + (cal*0.001);
-		System.out.println(p.weight);
+	void eat() {
+
+
+
 	}
 }
