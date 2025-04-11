@@ -1,0 +1,71 @@
+1. DDL - 테이블 생성(CREATE), 삭제(DROP), 수정 (ALTER)
+☆테이블 생성☆
+SQL> CREATE TABLE tbl_member( <<테이블명
+  2  mname VARCHAR2<<자료형(20)<<글자수,
+  3  age NUMBER<<정수 실수상관없음(3), // 소숫점은 NUMBER(5,2) 총5자리중에서 소숫점은 2자리입니다 라는뜻
+  4  gender CHAR<<문자한글자만(1), // N을 붙이면 바이트가 아닌 글자수로 변경됨.
+  5  phone CHAR(13)
+  6  );
+
+☆SQL> desc tbl_member // 내가만든 테이블의 열과 자료형들을 알 수 있음.☆
+
+☆테이블 삭제☆
+SQL> DROP TABLE tbl_member;
+
+☆테이블 열 추가(ALTER)☆
+ALTER TABLE t_student ADD (army CHAR(1)); 
+ALTER TABLE t_student ADD army CHAR(1); --괄호 안넣어도 에러 안남
+ALTER TABLE t_student ADD (age NUMBER(3) DEFAULT 20); -- 디폴트 = 기본값을 20으로 주겟다 라는 기본값 설정
+☆테이블 열 삭제(ALTER)☆
+ALTER TABLE t_student DROP COLUMN age; --열 삭제
+ALTER TABLE t_student  DROP (army);  -- 괄호하면 컬럼을 안써도 가능
+
+☆테이블 이름변경☆
+RENAME t_student TO test_student;
+
+☆테이블 내 데이터 삭제☆ (DELETE가 있지만 DELETE는 커밋을해야 반영이됨. 얘는 커밋을 안해도 바로 반영이됨.)
+TRUNCATE TABLE test_student;  --ROLLBACK해도 안돌아옴
+
+☆☆제약조건 일시적으로 풀기☆☆
+ALTER TABLE t2 DISABLE CONSTRAINT SYS_C007520; 
+☆☆제약조건 재활성화☆☆
+ALTER TABLE t2 ENABLE CONSTRAINT SYS_C007520;  --제약조건 다시 활성화 (null값이 있어서 작동을 안하므로 수정을 통해 null데이터를 바꾼 후 실행해야함)
+UPDATE t2 SET hobby = '걷기' WHERE mno = 5;
+☆☆제약조건 삭제☆☆
+ALTER TABLE t2 DROP CONSTRAINT SYS_C007520; --제약조건 삭제
+
+
+2. DML
+-C: INSERT   
+ INSERT INTO + 테이블명 //데이터를 넣을 테이블 지정
+( 1열  ,  2열  ,  3열  , 4열  ) // 열 지정
+VALUES//값 넣기
+( 1열  ,  2열  ,  3열  , 4열  );
+
+SQL> INSERT INTO tbl_member
+  2  (mname, age, gender, phone)
+  3  VALUES
+  4  ('일지매',40, 'F','010-7895-7456');
+
+-R:  SELECT + 열, 열, ·····
+
+      FROM + 테이블명
+      WHERE  + 열의 이름 = '자료이름' //해당열에 필요한 값을 지정해서 찾을때
+
+-U: UPDATE 
+ UPDATE + 테이블 명 //수정할 테이블지정
+ SET + 열  = 값 , // 전부 다 적용
+ WHERE  + 이름이 = '홍길동'
+
+ SQL> UPDATE tbl_member
+  2  SET gender = 'M'
+  3  WHERE mname = '홍길동';
+
+-D : delete
+ DELETE FROM + 테이블명 ; 
+
+
+3. DCL
+4. TCL
+1. commit : db를 저장하는것
+2. ROLLBACK : 이전단계로 돌아가는것
