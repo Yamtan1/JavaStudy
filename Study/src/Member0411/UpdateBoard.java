@@ -1,4 +1,4 @@
-package MemberPack0411;
+package Member0411;
 
 import java.sql.SQLException;
 import java.sql.Statement;

@@ -1,4 +1,4 @@
-package JDBC;
+package Study0410;
 
 public class Board {
 	

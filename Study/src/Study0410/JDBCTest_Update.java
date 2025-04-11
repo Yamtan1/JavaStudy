@@ -1,4 +1,4 @@
-package JDBC;
+package Study0410;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
