@@ -1,4 +1,4 @@
-package Study0415UIver;
+package Study0415UI;
 
 import java.sql.SQLException;
 import java.util.Scanner;

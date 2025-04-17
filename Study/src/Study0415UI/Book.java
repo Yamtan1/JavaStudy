@@ -1,4 +1,4 @@
-package Study0415UIver;
+package Study0415UI;
 
 import java.util.ArrayList;
 import java.util.List;
