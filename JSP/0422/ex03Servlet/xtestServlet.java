@@ -1,0 +1,27 @@
+package ex03.controller;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+
+@WebServlet("/xtest")
+public class xtestServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Stirng num = "1";
+		
+		//int n = Integer.parseInt(num);
+		
+		String grade = "A";
+		request.setAttribute("grade", grade);
+		request.getRequestDispatcher("result.jsp").forward(request, response);
+		
+	}
+
+}
