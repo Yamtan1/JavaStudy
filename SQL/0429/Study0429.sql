@@ -1,0 +1,13 @@
+CREATE TABLE rspuser(
+id VARCHAR2(50) PRIMARY KEY,
+pw VARCHAR2(50)
+);
+
+
+CREATE TABLE record(
+id VARCHAR2(50),
+total NUMBER,
+win NUMBER,
+lose NUMBER,
+draw NUMBER );
+
