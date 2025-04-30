@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #lunch{
+            text-align: center;
+            background-color: aquamarine;
+            margin: 0 600px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div id="lunch">
+<h1>점심메뉴 추천</h1>
+<button onclick="food()">랜덤음식 돌리기</button>
+<h2 id="result">아직 선택되지 않았어요</h2>
+</div>
+<hr>
+<h1>자동 문장 완성</h1>
+<button onclick="who()">랜덤음식 돌리기</button><br>
+<h2 id="sub">주어</h2> <h2 id="result2">목적어</h2> <h2 id="result3">서술어</h2>
+<hr>
+<div id="d1">click</div>
+<button onclick="change()">변경</button>
+
+
+
+
+<script>
+    function food(){
+        const menu = ['치킨','피자','짜장면','냉면','국밥','만두','라면','스테이크','칼국수','제육','돈까스','한솥'];
+        const rdNum = Math.floor(Math.random() * menu.length);
+        const result = menu[rdNum];
+        document.getElementById("result").textContent = result;
+        }
+
+    function who(){
+        const subject=['아이가','엄마가','선생님이','아빠가','형이','친구가','의사가','경찰관이','누나가','반장이','아이들이','선배가','가수가','운동선수가','사장님이'];
+        const object =['사탕을', '저녁을', '학생들을', '텔레비전을','동생을','나에게','편지를','환자를','도둑을','피아노를','청소를','공을','시험문제를','노래를','경기를'];
+        const predicate=['먹었다','준비했다','칭찬했다','고쳤다','도와주었다','보냈다','치료했다','잡았다','연주했다','시켰다','차고 놀았다','알려줬다','불렀다','이겼다','열었다'];
+
+        const rdnum = Math.floor(Math.random() * subject.length);
+        const rdnum2 = Math.floor(Math.random() * object.length);
+        const rdnum3 = Math.floor(Math.random() * predicate.length);
+
+        const result1 = subject[rdnum];
+        const result2 = object[rdnum2];
+        const result3 = predicate[rdnum3];
+
+        document.getElementById("sub").textContent = result1;
+        document.getElementById("result2").textContent = result2;
+        document.getElementById("result3").textContent = result3;
+    }
+    
+
+    function change(){
+        const d1 = document.getElementById("d1");
+        d1.style.color ="red";
+        d1.style.backgroundColor = "blue";
+        d1.innerHTML = "<h1>변경완료</h1>";
+    }
+    
+</script>
+</body>
+</html>
