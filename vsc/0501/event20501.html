@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+        #outer{
+            width: 200px; height: 200px;
+            background-color: palegreen;
+        }
+        #middle{
+            width: 150px; height: 150px;
+            background-color: peru;
+        }
+        #inner{
+            width: 60px; height: 60px;
+            background-color: plum;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <div id="middle">
+            <div id="inner">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inner = document.getElementById('inner');
+        const middle = document.getElementById('middle');
+        const outer = document.getElementById('outer');
+        
+        //이벤트 캡쳐링
+        outer.addEventListener('click', function(event){ 
+            console.log(event.currentTarget.id);}, true);
+        middle.addEventListener('click', function(event){
+            console.log(event.currentTarget.id);}, true);
+        inner.addEventListener('click', function(event){
+            console.log(event.currentTarget.id);}, true);
+        
+
+        //outer.addEventListener('click', f); //여기선 함수에 괄호 치지 않음 이벤트를 처리하는 곳 지정
+
+        /*function f(){
+            console.log('이벤트가 발생한곳 : ' + event.target.id);
+            console.log('이벤트를 처리하는 곳 : ' + event.currentTarget.id);
+        }*/
+    </script>
+</body>
+</html>

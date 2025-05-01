@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <td>번호</td>
+                <td>이름</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="num1"></th>
+                <th class="num2"></th>
+            </tr>
+            <tr>
+                <th class="num1"></th>
+                <th class="num2"></th>
+            </tr>
+            <tr>
+                <th class="num1"></th>
+                <th class="num2"></th>
+            </tr>
+        </tbody>
+    </table><br>
+    <button onclick="f()">채우기</button><br>
+
+    <table border="2">
+        <thead>
+            <tr>
+                <td>번호</td>
+                <td>이름</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row">
+                <th></th>
+                <th></th>
+            </tr>
+            <tr class="row">
+                <th></th>
+                <th></th>
+            </tr>
+            <tr class="row">
+                <th></th>
+                <th></th>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <button onclick="fillTable()">채우기</button>
+
+    
+    <script>
+        function f(){
+        const name = ['James', 'Ann', 'Benjamin'];
+
+        const num2 = document.querySelectorAll('.num2')[0];
+        const james = document.createElement('p'); 
+        james.textContent = name[0];
+        num2.appendChild(james);
+
+        const num2_2 = document.querySelectorAll('.num2')[1];
+        const Ann = document.createElement('p'); 
+        Ann.textContent = name[1];
+        num2_2.appendChild(Ann);
+        
+        const num2_3 = document.querySelectorAll('.num2')[2];
+        const Ben = document.createElement('p'); 
+        Ben.textContent = name[2];
+        num2_3.appendChild(Ben);
+
+        const num1 = document.querySelectorAll('.num1')[0];
+        const one = document.createElement('p');
+        one.textContent = '1';
+        num1.appendChild(one);
+
+        const num1_2 = document.querySelectorAll('.num1')[1];
+        const two = document.createElement('p');
+        two.textContent = '2';
+        num1_2.appendChild(two);
+
+        const num1_3 = document.querySelectorAll('.num1')[2];
+        const three = document.createElement('p');
+        three.textContent = '3';
+        num1_3.appendChild(three);
+        }
+        function fillTable() {
+        const names = ['James', 'Ann', 'Benjamin'];
+        const rows = document.querySelectorAll('.row');
+
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].children;
+            cells[0].textContent = i + 1;      // 번호
+            cells[1].textContent = names[i];   // 이름
+        }
+    }
+
+    </script>
+</body>
+</html>

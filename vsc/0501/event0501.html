@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #item{
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            background-color: palevioletred;
+            font-size: 2rem;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap; /* 아이템들이 여러 줄로 감싸지도록 설정 */
+            width: 330px;
+            gap: 10px; /* 아이템 간 간격 */
+        }
+
+        .boxs {
+            width: 100px; /* 한 줄에 3개씩 나오게 설정 (30%로 설정) */
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            background-color: gray;
+            font-size: 2rem;
+            border: 1px solid black;
+            box-sizing: border-box; /* padding과 border가 width에 포함되도록 설정 */
+        }
+    </style>
+</head>
+<body>
+    <h1>Event 객체</h1>
+    <hr>
+    <div id="item" onclick="f(event)">1</div>
+    <hr>
+    <div class="container" onclick="f2(event)">
+    <div id="item1" class="boxs">1</div>
+    <div id="item2" class="boxs">2</div>
+    <div id="item3" class="boxs">3</div>
+    <div id="item4" class="boxs">4</div>
+    <div id="item5" class="boxs">5</div>
+    <div id="item6" class="boxs">6</div>
+    <div id="item7" class="boxs">7</div>
+    <div id="item8" class="boxs">8</div>
+    <div id="item9" class="boxs">9</div>
+</div>
+
+
+    <script>
+        function f(event){ //event객체를 쓰겟다!
+            const targetTagName = event.target.tagName;
+            if(targetTagName == 'DIV'){ //대문자로 해야함 콘솔창에서 태그네임 출력시 대문자로 나오기때문
+                console.log('div 태그입니다');
+            }
+            else{
+                console.log('div태그가 아닙니다')
+            }
+            //console.log(event.target); // 콘솔창에서 이벤트가 발생한 요소를 알려줌 
+            //console.log(event.target.id); // 콘솔창에서 이벤트가 발생한 아이디 값을 알려줌
+            //console.log(event.target.tagName); //출력값 DIV
+            //console.log(event.target.innerText); // 출력값 1
+
+        }
+        function f2(event){
+            console.log(event.target.innerText);
+        }
+    </script>
+
+</body>
+</html>

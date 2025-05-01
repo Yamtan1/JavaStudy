@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>아이디</th>
+            <th>패스워드</th>
+            <th>이름</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="info"></tr>
+            <tr class="info"></tr>
+            <tr class="info"></tr>
+            <tr class="info"></tr>    
+            <tr class="info"></tr>        
+        </tbody>
+    </table>
+    <button onclick="f()">채우기</button>
+    <script>
+        const member = [{id:'aaa', pw:'111',name:'홍길동'},
+        {id:'bbb', pw:'222',name:'임꺽정'},
+        {id:'ccc', pw:'333',name:'이몽룡'},
+        {id:'ddd', pw:'444',name:'이춘향'},
+        {id:'eee', pw:'555',name:'고길동'}
+    ];
+    const info = document.querySelectorAll('.info');
+    function f(){
+        if (info[0].children.length > 0) {
+            alert('이미 데이터가 채워졌습니다!');
+            return;  // 이미 채워졌으면 더 이상 실행하지 않음
+        }
+    for(let i = 0; i < member.length; i++){
+        const row = info[i];
+    const id = document.createElement('th');
+    const pw = document.createElement('th');
+    const name = document.createElement('th');
+    id.textContent=member[i].id;
+    pw.textContent=member[i].pw;
+    name.textContent=member[i].name;;
+    row.appendChild(id);
+    row.appendChild(pw);
+    row.appendChild(name);
+    }
+    }
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+스프링0501
+static 폴더엔 정적인 파일만 넣음 html/css 등
+templates -- 뷰 템플릿
+DemoApplication.java == 메인메서드
+
+✔✔패키지 만드는 규칙✔✔
+-com.example.demo.controller
+-com.example.demo.DAO 이런식으로 이어 붙여야함
+
+✔✔jsp파일 패키지 만드는 규칙✔✔
+src - main -폴더생성(패키지 ㄴㄴ)- webapp폴더생성 - WEB-INF폴더생성-views폴더생성- views에서 new> other > web> jsp파일 생성
+
+
+✔✔application.properties파일 작성✔✔
+spring.application.name=demo
+
+server.port=8092
+
+spring.mvc.view.prefix=/WEB_INF/views/
+spring.mvc.view.suffix=.jsp
+
+404 에러는 자원이 없을때
+405는 메서드 방식이 잘못되어있을때 (GET, POST방식)
+
+gradle --------------------
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'jakarta.servlet:jakarta.servlet-api'
+	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+---------------------------------------
+application------------------------------------------------------------
+spring.application.name=demo
+
+server.port=8092
+
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+--------------------------------------------------------------------
