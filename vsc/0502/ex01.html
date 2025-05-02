@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--데이터 유효성 검사!-->
+    <form name="frm">
+        <input type="text" name="name" onfocus="f()"> <!-- 누르자마자 알림창 나옴-->
+        <input type="text" name="name" onblur="f()"> <!-- 텍스트박스를 선택 후 나오면 알림창 나옴-->
+        <input type="text" name="age" >
+    </form>
+    <hr>
+    <form name="frm2">
+        <input type="text" name="txt1" onblur="f()"> <br>  
+        <input type="text" name="txt2"> <br>
+    </form>
+    <hr>
+    <form name="frm3" id="frm3">
+        <input type="text" name="txt11"> <br>  
+        <input type="text" name="txt22"> <br>
+        <input type="button" value="전송" onclick="f1()">
+    </form>
+    <hr>
+    <form name="frm4" id="frm4" onsubmit="return validateForm()">
+        <input type="text" name="txt11"> <br>  
+        <input type="text" name="txt22"> <br>
+        <input type="submit" value="전송" onclick="f1()">
+    </form>
+
+    <script>
+        function f(){
+            if(frm2.txt1.value === ''){
+                alert('텍스트박스에 포커스가 설정되었어요');
+                setTimeout(function(){
+                    frm2.txt1.focus();
+                }, 0)
+            }
+        }
+        function f1(){
+            const form = document.forms['frm3'];
+            if(form.txt11.value.trim() === ''){
+                alert('txt11 값을 입력하세요');
+                form.txt11.focus();
+                return;
+            }
+            form.submit();
+        }
+        document.getElementById("frm3").addEventListener("submit", f2);
+        function f2(event){
+            event.preventDefault(); //submit 버튼이 기본이벤트를 가지고있는 것을 해제함
+
+            const form = event.target;
+            const txt11 = form.txt11.value.trim();
+            const txt22 = form.txt22.value.trim();
+
+            if(txt11 == ''){
+                alert('txt11 값을 입력하세요.')
+                form.txt11.focus();
+                return; //밑에잇는 submit이 실행되지 않도록 함수를 종료시킨다
+            }
+            else if (txt22 ==''){
+                alert('txt22 값을 입력하세요.')
+                form.txt22.focus();
+                return; //밑에잇는 submit이 실행되지 않도록 함수를 종료시킨다
+            }
+            form.submit();
+        }
+        function validateForm(){
+            const form = document.forms['frm4'];
+            if(form.txt11.value.trim() === ''){
+                alert('txt11 값을 입력하세요');
+                form.txt11.focus();
+                return false;
+            }
+            return true;
+        }
+        
+    </script>
+</body>
+</html>
