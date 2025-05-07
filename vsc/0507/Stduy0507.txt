@@ -1,0 +1,29 @@
+Ajax 
+
+동기-코드가 1-2-3 순서대로 진행
+
+
+비동기-1,2,3중 2번이 비동기함수라 할 때, 비동기함수가 중간에 있으면 1-3-2 순서로 진행
+
+콜백함수 : 어떤 함수의 파라미터(매개변수)로 쓰이는 함수
+Live reload enabled.
+let obj = {name:'James', age: 32}
+undefined
+obj;
+{name: 'James', age: 32}
+typeof(obj);
+'object'
+let json = JSON.stringify(obj); >>오브젝트를 json(문자열)로 바꾸는 함수
+undefined
+json;
+'{"name":"James","age":32}'
+typeof(json);
+'string'
+let obj2 = JSON.parse(json);  >> json(문자열)을 오브젝트로 바꾸는 함수
+undefined
+obj2;
+{name: 'James', age: 32}
+typeof(obj2);
+'object'
+
+db연동해서 아이디중복여부 및 회원가입

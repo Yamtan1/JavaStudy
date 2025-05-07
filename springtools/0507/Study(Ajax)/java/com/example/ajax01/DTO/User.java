@@ -1,0 +1,10 @@
+package com.example.ajax01.DTO;
+
+import lombok.Data;
+
+@Data
+public class User {
+	
+	private String name;
+	private int age;
+}
