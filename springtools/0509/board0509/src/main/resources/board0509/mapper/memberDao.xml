@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board0509.dao.IMemberDAO">
+	<select id="login" resultType="int">
+	SELECT COUNT(*) FROM test_member WHERE id = #{id} AND pw = #{pw}
+	</select>
+	
+	<insert id="memberInsert">
+	INSERT INTO test_member (id, pw, name, phone) VALUES (#{id}, #{pw}, #{name}, #{phone})
+	</insert>
+</mapper>
