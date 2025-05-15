@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id ="ptxt" data-greet="hello">---------------</p>
+    <!-- 이런식으로 여러개도 가능 <p id ="ptxt" data-greet="hello" data-name="James" data-nickname="JJ">---------------</p> -->
+    <input type="text" data-name="James" data-nickname="JJ" name="name">
+    <div id="demo">div</div>
+    <div id="user" data-user='{"name" : "James Dean", "age" : 23, "job": "Actor"}'></div>
+    <div id="hobby" data-hobby='["독서", "달리기", "코딩"]'></div>
+
+    <script>
+        const ptxt= document.getElementById('ptxt');
+        console.log(ptxt.dataset.greet); //data- 의 값을 읽을때는 dataset으로 읽는다
+        console.log(ptxt.dataset['greet']);
+        console.log(ptxt.dataset.green === 'hello');
+        
+        const $txt = document.querySelector('input[data-name="James"]') //엘리먼트를 표시할떄 $표시를 붙임
+        $txt.value= 'I miss you';
+        
+        const $demo= document.getElementById('demo');
+
+        $demo.dataset.comment='good job'; //dataset을 스크립트로 지정 body부분에 지정하지 않아도 여기서 가능
+        console.log($demo.dataset.comment);
+
+        $demo.setAttribute('data-encode-char', 'utf-8')
+        console.log($demo.getAttribute('data-encode-char'));
+
+        $demo.dataset.nickName = 'apple';
+        console.log($demo.dataset.nickName);
+        console.log($demo.getAttribute('data-nick-name'));
+
+        const $div1 = document.querySelector('#user');
+        const obj = $div1.dataset.user;
+        console.log(obj);
+        const user = JSON.parse(obj);
+
+        console.log(user.name);
+        console.log(user.age);
+        console.log(user.job);
+
+        const $div2= document.getElementById('hobby');
+        const arr = $div2.dataset.hobby;
+        console.log(arr);
+        const hobbys = JSON.parse(arr);
+
+        console.log(hobbys);
+
+    </script>
+</body>
+</html>

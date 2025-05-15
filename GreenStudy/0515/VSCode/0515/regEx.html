@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>정규표현식</h1>
+    <!--
+    [아이디 입력조건]
+    1. 입력되는 전체 길이는 5~8사이여야한다.
+    2. 아이디는 숫자와 영문자로만 사용가능하다
+    3. 아이디의 첫글자는 영문자로 한다
+    -->
+    아이디 : <input type="text" name="mid" id="mid"> 
+    <input type="button" value="commit" onclick="process()">
+    <div id="demo"></div>
+    <!--
+        [날짜 입력 조건]
+        연도 4자리, 월이나 일은 1자리이거나 2자리로 한다.
+        예_ 2018-05-24
+    -->
+    입사연월일 : <input type="text" name="hire_date" id="hire_date">
+                <input type="button" value="commit" onclick="process2()">
+                <div id="demo2"></div>
+
+
+    <script>
+        function process2(){
+            const date = document.getElementById('hire_date').value;
+            const patt = new RegExp('^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|1[0-9]|2[0-9]|3[01])$');
+            if(patt.test(date)){
+                document.getElementById('demo2').innerHTML = '성공'
+            }else{
+                alert("다시 입력하세요");
+                document.getElementById('hire_date').value = '';
+                document.getElementById('hire_date').focus();
+                document.getElementById('demo2').innerHTML = '실패';
+            }
+            }
+        function process(){
+            const mid = document.getElementById('mid').value;
+            const patt = new RegExp('^[a-zA-Z][0-9a-zA-Z]{4,7}$');
+
+            if(patt.test(mid)){
+                document.getElementById('demo').innerHTML = '성공';
+            }
+            else{
+                alert("다시 입력하세요");
+                document.getElementById('mid').value = '';
+                document.getElementById('mid').focus();
+                document.getElementById('demo').innerHTML = '실패';
+            }
+        }
+    </script>
+</body>
+</html>
