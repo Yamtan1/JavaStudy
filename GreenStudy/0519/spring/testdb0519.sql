@@ -1,0 +1,8 @@
+CREATE TABLE tbl_user(
+id VARCHAR2(20) PRIMARY KEY,
+pw VARCHAR2(10),
+name VARCHAR2(20),
+role VARCHAR2(20));
+
+INSERT INTO tbl_user VALUES ('aaa', '1234', 'Alice', 'MEMBER');
+COMMIT;

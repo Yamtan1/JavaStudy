@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="myBtn">클릭</button>
+    <button id="myBtn2">클릭2</button>
+    <script>
+        //클로저의 핵심은 내부함수가 외부함수의 실행이 끝난 후에도
+        //외부함수의 변수를 기억하고 접근할 수 있다는 점이다.
+
+        //클로저 사용 예1 : 카운터
+        function createCounter(){
+            let count = 0;
+
+            return function(){
+                count++;
+                return count;
+            }
+        }
+
+        const counter1 = createCounter();
+
+        console.log(counter1()); //결과 값 : 1
+        console.log(counter1()); //결과 값 : 2
+        console.log(counter1()); //결과 값 : 3 
+
+        const counter2 = createCounter();
+
+        console.log(counter2()); //결과 값 : 1
+        console.log(counter2()); //결과 값 : 2
+        console.log(counter2()); //결과 값 : 3
+
+        //클로저 사용 예2 : 카운터
+        function createCounter2(){
+            let count = 0;
+
+            return {
+                increment: function(){
+                    count++;
+                    return count;
+                }, 
+                decrement: function(){
+                    count--;
+                    return count;
+                }
+            };
+        }
+        const counter3 = createCounter2();
+
+        console.log(counter3.increment()); //결과 값 : 1
+        console.log(counter3.increment()); //결과 값 : 2
+        console.log(counter3.increment()); //결과 값 : 3
+        console.log(counter3.decrement()); //결과 값 : 2
+        console.log(counter3.decrement()); //결과 값 : 1
+
+
+        //클로저 사용 예3 : 정보은닉 / 캡슐화
+        function createSecret(secret){
+            return {
+                getSecret: function(key){
+                    if(key === 'green1234'){
+                        return secret;
+
+                    }else{
+                        return '비밀접근실패!';
+                    }
+                }
+            };
+        }
+        const mySecret = createSecret('JS 짱!');
+        console.log(mySecret.getSecret('green1234'));
+        console.log(mySecret.getSecret('sadasdas'));
+
+        //클로저 사용 예4 : private 변수 구현
+        function createBankAccount(initialBalance){
+            let balance = initialBalance;
+            return {
+                deposit: function(amount){
+                    balance += amount;
+                    return `입금완료 : 현재 잔액 ${balance}원`;
+                },
+                widthdraw: function(amount){
+                    if(amount > balance){
+                        return "잔액부족";
+                    }
+                    balance -= amount;
+                    return `출금완료 : 현재 잔액 ${balance}원`;
+                },
+                getBalance: function(){
+                    return `현재잔액 : ${balance}`;
+                }
+            };
+        }
+
+        const myAccount = createBankAccount(10000);
+        console.log(myAccount.deposit(5000));
+        console.log(myAccount.widthdraw(2500));
+        console.log(myAccount.getBalance());
+        console.log(myAccount.balance); //직접접근불가
+
+        //클로저 사용 예5 : 함수팩토리
+        function multiplyBy(factor){
+            return function(number){
+                return number * factor;
+            };
+        }
+
+        const double = multiplyBy(2);
+        const triple = multiplyBy(3);
+        const quadruple = multiplyBy(4);
+        
+        console.log(double(5));
+        console.log(triple(5));
+        console.log(quadruple(5));
+
+        const numbers = [1, 2, 3, 4, 5];
+        console.log(numbers.map(double)); // 2 4 6 8 10
+
+        //클로저 사용 예6 : 이벤트 핸들러
+        function setupButton(buttonElement, message){
+            buttonElement.addEventListener('click', function(){
+                alert(message);
+            });
+        }
+        const myBtn = document.getElementById('myBtn');
+        setupButton(myBtn, '버튼이 클릭되었습니다.');
+        const myBtn2 = document.getElementById('myBtn2');
+        setupButton(myBtn2, '버튼2가 클릭되었습니다.');
+    </script>
+</body>
+</html>
