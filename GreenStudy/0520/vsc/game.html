@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .game{
+            border : solid 1px gray;
+            border-radius: 5px;   
+            margin-bottom: 15px;
+        }
+        .game p{
+            margin-left: 25px;
+        }
+        .game #gametitle{
+            font-size: 23px;
+            font-weight: bold;
+        }
+        #maintitle{
+            font-size: 40px;
+            font-weight: bold;
+        }
+         #count {
+            color: white;             
+            background-color: red;    
+            border: 1px black solid;
+            border-radius: 100%;       
+            text-align: center;
+            display: inline-block;    
+            text-align: center;
+            min-width: 23px;  
+            padding-bottom: 1.5px;
+        }
+        #sessionModal{
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+		
+        #modalContent{
+            background-color: white;
+            margin: 20% auto;
+            padding: 20px;
+            width: 700px;
+            text-align: left;
+            border-radius: 10px;
+        }
+        #gameName {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #gameInfo{
+            font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+<p id="maintitle">GameZone🎮</p>
+<button onclick="darkMode()" id="displaybutton">다크 모드</button><br>
+<input type="text" placeholder="게임 검색..." id="searchInput" oninput="filterGames()"> <span id="count">0 </span><span>🛒</span><br>
+<select name="genre" id="genreSelect" onchange="filterGames()">
+    <option value="">장르 선택</option>
+    <option value="rpg">RPG</option>
+    <option value="fps">FPS</option>
+    <option value="aos">AOS</option>
+</select> <br><br>
+<div class="game">
+    <p id="gametitle">던전앤파이터</p>
+    <p>가격 : $29.99</p>
+    <p>평점 : ★★★★☆</p>
+    <input type="hidden" id="info" value="던전앤파이터는 네오플이 제작하고 넥슨에서 서비스하는 벨트 스크롤 액션 게임이다.">
+    <input type="hidden" id="genre" value="rpg">
+    <p><button onclick="gamecount()">장바구니 추가</button> <button onclick="gameinfo(this)">상세정보</button></p>
+</div>
+<div class="game">
+    <p id="gametitle">로스트 아크</p>
+    <p>가격 : $19.99</p>
+    <p>평점 : ★★★★☆</p>
+    <input type="hidden" id="info" value="스마일게이트에서 만든 신작 쿼터뷰 MMORPG로 총 6개의 클래스와 클래스별로 전직 가능한 직업군이 별도로 존재하며 레이드, 채집, 생활 등 다양한 콘텐츠를 가지고 있다.">
+    <input type="hidden" id="genre" value="rpg">
+    <p><button onclick="gamecount()">장바구니 추가</button> <button onclick="gameinfo(this)">상세정보</button></p>
+</div>
+<div class="game">
+    <p id="gametitle">리그오브레전드</p>
+    <p>가격 : $39.99</p>
+    <p>평점 : ★★★★☆</p>
+    <input type="hidden" id="info" value="리그 오브 레전드는 세계 최고의 MOBA(Multiplayer Online Battle Arena) 게임입니다. 끝없이 이어지는 실시간 전투와 협동을 통한 팀플레이, RTS와 RPG를 하나의 게임에서 동시에 즐길 수 있는 새로운 장르의 온라인 게임입니다. ">
+    <input type="hidden" id="genre" value="aos">
+    <p><button onclick="gamecount()">장바구니 추가</button> <button onclick="gameinfo(this)">상세정보</button></p>
+</div>
+<div class="game">
+    <p id="gametitle">메이플스토리</p>
+    <p>가격 : $19.99</p>
+    <p>평점 : ★★★★☆</p>
+    <input type="hidden" id="info" value="메이플스토리는 위젯 스튜디오에서 제작하고 넥슨 코리아가 서비스하는 세계 최초의 2D 사이드 스크롤 방식 온라인 게임이다.">
+    <input type="hidden" id="genre" value="rpg">
+    <p><button onclick="gamecount()">장바구니 추가</button> <button onclick="gameinfo(this)">상세정보</button></p>
+</div>
+<div class="game">
+    <p id="gametitle">발로란트</p>
+    <p>가격 : $29.99</p>
+    <p>평점 : ★★★★☆</p>
+    <input type="hidden" id="info" value="전 세계를 무대로 한 발로란트에서 여러분의 실력을 보여주세요. 발로란트는 5대5 전술 슈팅 게임으로, 진영에 따라 스파이크를 설치하거나 해체하는 것이 목표입니다.">
+    <input type="hidden" id="genre" value="fps">
+    <p><button onclick="gamecount()">장바구니 추가</button> <button onclick="gameinfo(this)">상세정보</button></p>
+</div>
+
+<!-- 모달 -->
+<div id="sessionModal">
+	<div id="modalContent">
+		<p id="gameName"></p>
+        <p id="gameInfo"></p>
+		<button onclick="closeModal()">닫기</button>
+	</div>
+</div>
+
+<script>
+   let isDark = false; 
+   let count = 0;
+  function darkMode() {
+    const button = document.getElementById('displaybutton');
+    
+    if (!isDark) {
+      document.body.style.backgroundColor = "#1e1e1e";
+      document.getElementById('modalContent').style.backgroundColor = "gray";
+      document.body.style.color = "white";
+      button.innerText = "라이트모드";
+      isDark = true;
+    } else {
+      document.body.style.backgroundColor = "white";
+      document.getElementById('modalContent').style.backgroundColor = "white";
+      document.body.style.color = "black";
+      button.innerText = "다크모드";
+      isDark = false;
+    }
+  }
+
+  function gamecount(){
+    const games = document.getElementById('count');
+    count++;
+    games.innerText = count;
+  }
+  function gameinfo(button){
+    const gameDiv = button.closest('.game'); // 클릭된 버튼의 상위 .game 요소 찾기
+    const title = gameDiv.querySelector('#gametitle').innerText;
+    const price = gameDiv.querySelectorAll('p')[1].innerText;
+    const rating = gameDiv.querySelectorAll('p')[2].innerText;
+    const info = gameDiv.querySelector('#info').value;
+
+    const gameName = document.getElementById('gameName');
+    const gameInfo = document.getElementById('gameInfo');
+    gameName.innerText = title;
+    gameInfo.innerText = info;
+    document.getElementById("sessionModal").style.display = "block";
+  }
+  function closeModal(){
+    document.getElementById("sessionModal").style.display = "none";
+  }
+
+  function filterGames() {
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    const selectedGenre = document.getElementById("genreSelect").value;
+
+    const allGames = document.querySelectorAll(".game");
+
+    allGames.forEach(game => {
+        const title = game.querySelector("#gametitle").innerText.toLowerCase();
+        const genre = game.querySelector("#genre").value;
+
+        const matchSearch = title.includes(searchValue);
+        const matchGenre = selectedGenre === "" || genre === selectedGenre;
+
+        if (matchSearch && matchGenre) {
+            game.style.display = "block";
+        } else {
+            game.style.display = "none";
+        }
+    });
+}
+</script>
+</body>
+</html>
