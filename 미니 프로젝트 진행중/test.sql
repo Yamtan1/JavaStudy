@@ -350,3 +350,97 @@ CREATE TABLE reservation (
 );
 SELECT * FROM movie;
 commit;
+
+SELECT 
+    m.movie_id,
+    m.director,
+    m.actors,
+    m.trailer_url,
+    AVG(r.rating) AS avg_rating
+FROM movie_detail m
+LEFT JOIN review r ON m.movie_id = r.movie_id
+WHERE m.movie_id = 1
+GROUP BY 
+    m.movie_id,
+    m.director,
+    m.actors,
+    m.trailer_url
+ORDER BY avg_rating DESC;
+
+CREATE TABLE payment (
+    payment_id NUMBER PRIMARY KEY,
+    user_id VARCHAR2(20),            -- 결제한 사용자
+    payment_type VARCHAR2(10),       -- '예매', '대관', '광고'
+    target_id NUMBER,                -- 해당 결제 대상의 ID (reservation_id or rental_id or ad_id)
+    amount NUMBER,
+    pay_date DATE DEFAULT SYSDATE,
+    FOREIGN KEY (user_id) REFERENCES googv_user(id)
+);
+commit;
+INSERT INTO payment (
+    payment_id,
+    user_id,
+    payment_type,
+    target_id,
+    amount,
+    pay_date
+) VALUES (
+    1,                    -- payment_id (다음 시퀀스 값 사용 시에는 시퀀스명.NEXTVAL)
+    'asdf1234',           -- 존재하는 사용자 ID
+    '예매',                -- 결제 유형: '예매' 또는 '대관', '광고'
+    101,                  -- 예약 ID 예시
+    12000,                -- 결제 금액
+    SYSDATE               -- 결제 일시 (현재 시간)
+);
+INSERT INTO payment (
+    payment_id,
+    user_id,
+    payment_type,
+    target_id,
+    amount,
+    pay_date
+) VALUES (
+    2,                    -- payment_id (다음 시퀀스 값 사용 시에는 시퀀스명.NEXTVAL)
+    'asdf1234',           -- 존재하는 사용자 ID
+    '예매',                -- 결제 유형: '예매' 또는 '대관', '광고'
+    102,                  -- 예약 ID 예시
+    15000,                -- 결제 금액
+    SYSDATE               -- 결제 일시 (현재 시간)
+);
+CREATE TABLE qna (
+    qna_id NUMBER PRIMARY KEY,
+    user_id VARCHAR2(20),
+    title VARCHAR2(100),
+    content CLOB,
+    qna_date DATE DEFAULT SYSDATE,
+    FOREIGN KEY (user_id) REFERENCES googv_user(id)
+);
+select * FROM googv_user;
+select * FROM payment;
+SELECT SUM(amount) AS total_amount
+	FROM payment
+	WHERE user_id = 'asdf1234';
+    commit;
+    
+    CREATE TABLE coupon (
+    coupon_id NUMBER PRIMARY KEY,             -- 쿠폰 고유 ID
+    name VARCHAR2(50),                        -- 쿠폰 이름 (예: 20% 할인, 영화 이용권)
+    description VARCHAR2(200),                -- 쿠폰 설명 (예: "모든 영화에 사용 가능")
+    discount_type VARCHAR2(20),               -- 할인 유형: '퍼센트', '정액', '무료이용'
+    discount_value NUMBER,                    -- 할인 수치 (예: 20 → 20%, 5000 → 5000원 할인)
+    valid_days NUMBER,                        -- 발급일로부터 유효한 일 수 (예: 7일)
+    use_limit NUMBER DEFAULT 1                -- 사용 가능 횟수 (기본 1회)
+);
+CREATE TABLE user_coupon (
+    user_coupon_id NUMBER PRIMARY KEY,        -- 사용자 쿠폰 고유 ID
+    user_id VARCHAR2(20),                     -- 쿠폰을 받은 회원 ID
+    coupon_id NUMBER,                         -- 어떤 쿠폰인지 (coupon 테이블 참조)
+    issued_date DATE DEFAULT SYSDATE,         -- 쿠폰 발급일
+    expiry_date DATE,                         -- 만료일 (issued_date + valid_days 기준으로 계산)
+    is_used CHAR(1) DEFAULT 'N',              -- 쿠폰 사용 여부 ('N': 미사용, 'Y': 사용 완료)
+    FOREIGN KEY (user_id) REFERENCES googv_user(id),         -- user 테이블 참조
+    FOREIGN KEY (coupon_id) REFERENCES coupon(coupon_id)    -- coupon 테이블 참조
+);
+
+SELECT * FROM coupon;
+commit;
