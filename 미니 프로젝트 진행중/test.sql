@@ -19,8 +19,8 @@ CREATE TABLE movie (
     duration NUMBER, -- 러닝 타임
     poster_url VARCHAR2(200)
 );
-CREATE SEQUENCE movie_seq;
 
+CREATE SEQUENCE movie_seq;
 INSERT INTO movie VALUES (movie_seq.nextval, '미션 임파서블:파이널 레코닝', '액션/미국', '15세이상관람가', '2025-05-17', '2025-06-18', '169', '/images/missionImpossible.jpg');
 INSERT INTO movie VALUES (movie_seq.nextval, '릴로 & 스티치', '애니메이션/미국', '전체관람가', '2025-05-21', '2025-06-28', '108', '/images/LiloStitch.jpg');
 INSERT INTO movie VALUES (movie_seq.nextval, '야당', '범죄, 액션 / 한국', '청소년관람불가', '2025.04.16', '2025-06-20', '123', '/images/yadang.jpg');
@@ -34,19 +34,6 @@ INSERT INTO movie VALUES (movie_seq.nextval, '콘클라베', '드라마, 스릴�
 INSERT INTO movie VALUES (movie_seq.nextval, '플로우', '애니메이션 / 기타', '전체관람가', '2025.03.19', '2025-06-18', '85', '/images/flow.jpg');
 INSERT INTO movie VALUES (movie_seq.nextval, '달팽이의 회고록', '애니메이션 / 호주', '15세이상관람가', '2025.04.30', '2025-06-29', '95', '/images/snail.jpg');
 INSERT INTO movie VALUES (movie_seq.nextval, '보이 인 더 풀', '드라마, 멜로/로맨스 / 한국', '12세이상관람가', '2025.05.14', '2025-07-13', '89', '/images/boy.jpg');
-
-
-select * from movie;
-
-CREATE TABLE movie_detail (
-    movie_id NUMBER PRIMARY KEY,
-    director VARCHAR2(100),
-    actors VARCHAR2(500), -- 쉼표로 구분된 문자열 가능
-    synopsis CLOB, -- 줄거리
-    trailer_url VARCHAR2(200), -- 예고편 영상
-    FOREIGN KEY (movie_id) REFERENCES movie(movie_id)
-);
-select * from movie_detail;
 
 INSERT INTO movie_detail VALUES (1, '크리스토머 맥쿼리', '톰 크루즈, 헤일리 앳웰, 빙 라메스, 사이먼 페그, 바네사 커비, 에사이 모랄레스, 폼 클레멘티에프', '디지털상의 모든 정보를 통제할 수 있는 사상 초유의 무기로 인해
 전 세계 국가와 조직의 기능이 마비되고, 인류 전체가 위협받는 절체절명의 위기가 찾아온다.
@@ -97,7 +84,7 @@ INSERT INTO movie_detail VALUES (3, '황병국', ' 강하늘, 유해진, 박해�
 마약판을 설계하는 브로커 강수, 더 높은 곳에 오르려는 관희, 마약 범죄 소탕에 모든 것을 건 상재.
 세 사람은 각자 다른 이해관계로 얽히기 시작하는데…', '/previews/yadang.mp4');
 
-INSERT INTO movie_detail VALUES (21, '민규동', '이혜영, 김성철, 연우진, 김무열, 신시아', '지킬 게 생긴 킬러 VS 잃을 게 없는 킬러
+INSERT INTO movie_detail VALUES (5, '민규동', '이혜영, 김성철, 연우진, 김무열, 신시아', '지킬 게 생긴 킬러 VS 잃을 게 없는 킬러
 
 40여 년간 감정 없이 바퀴벌레 같은 인간들을 방역해온 60대 킬러 ‘조각’(이혜영).
 ‘대모님’이라 불리며 살아있는 전설로 추앙받지만
@@ -114,7 +101,7 @@ INSERT INTO movie_detail VALUES (21, '민규동', '이혜영, 김성철, 연우�
 
 삶의 끝자락에서, 가장 강렬한 대결이 시작된다!', '/previews/pagwa.mp4');
 
-INSERT INTO movie_detail VALUES (41, '라이언 쿠글러', ' 마이클 B. 조던, 헤일리 스타인펠드', '1932년, 시카고 갱단의 생활을 정리하고 고향 미시시피로 돌아온
+INSERT INTO movie_detail VALUES (6, '라이언 쿠글러', ' 마이클 B. 조던, 헤일리 스타인펠드', '1932년, 시카고 갱단의 생활을 정리하고 고향 미시시피로 돌아온
 쌍둥이 형제 ‘스모크’와 ‘스택’(마이클 B. 조던)은 큰돈을 벌기 위해
 술집 ‘주크 조인트’를 운영하기로 한다.
 
@@ -124,7 +111,7 @@ INSERT INTO movie_detail VALUES (41, '라이언 쿠글러', ' 마이클 B. 조�
 
 그날 밤, 우리는 악을 깨웠다!', '/previews/Cinus.mp4');
 
-INSERT INTO movie_detail VALUES (42, '레니 할린', '아론 에크하트, 니나 도브레브', 'CIA의 최고의 요원들이 연이어 사라지는 사건이 발생하고, 브릭레이어라는
+INSERT INTO movie_detail VALUES (7, '레니 할린', '아론 에크하트, 니나 도브레브', 'CIA의 최고의 요원들이 연이어 사라지는 사건이 발생하고, 브릭레이어라는
 별명의 전설적 존재로 불리우던 전직 CIA 요원 ‘스티브 베일’을 다시 불러들인다.
 
 베일은 현직 CIA 요원 ‘케이트 배넌’과 파트너가 되어 사라진 요원들을 추적하지만
@@ -136,7 +123,7 @@ CIA의 존폐를 위협하는 숨겨진 적을 무너뜨릴 수 있을까?
 운명을 걸고 펼쳐지는 치열한 추적과 반전의 연속
 모든 것을 걸고 싸워야 하는 순간이 다가온다.', '/previews/brick.mp4');
 
-INSERT INTO movie_detail VALUES (43, '웨스 앤더슨', '베니치오 델 토로, 미아 트리플턴, 마이클 세라, 리즈 아메드, 톰 행크스, 브라이언 크랜스톤, 마티유 아말릭',
+INSERT INTO movie_detail VALUES (8, '웨스 앤더슨', '베니치오 델 토로, 미아 트리플턴, 마이클 세라, 리즈 아메드, 톰 행크스, 브라이언 크랜스톤, 마티유 아말릭',
 '“모든 자료는 저 신발 상자에 들어있다.
 내가 30년간 공을 들인 일생일대의 프로젝트지.”
 
@@ -146,7 +133,7 @@ INSERT INTO movie_detail VALUES (43, '웨스 앤더슨', '베니치오 델 토�
 
 그러나, 갑작스러운 적들의 방해로 인해 자자 코다의 사업이 무너질 위기에 처하자, 자자는 딸 리즐과 가정교사 비욘을 데리고 주요 동업자들을 설득하기 위해 페니키아로 떠나는데…', '/previews/skim.mp4');
 
-INSERT INTO movie_detail VALUES (44, '소라 네오', '쿠니하라 하야토, 히다카 유키토, 하야시 유타, 시나 펭, 아라지, 이노리 키라라, 나카지마 아유무',
+INSERT INTO movie_detail VALUES (9, '소라 네오', '쿠니하라 하야토, 히다카 유키토, 하야시 유타, 시나 펭, 아라지, 이노리 키라라, 나카지마 아유무',
 '점멸등이 일렁이는 근미래의 도쿄.
 
 음악에 빠진 고등학생 ‘유타’와 ‘코우’는
@@ -159,13 +146,13 @@ INSERT INTO movie_detail VALUES (44, '소라 네오', '쿠니하라 하야토, �
 그날 이후 그들을 둘러싼
 모든 것이 조금씩 달라지기 시작하는데…', '/previews/happyend.mp4');
 
-INSERT INTO movie_detail VALUES (45, '에드워드 버거', '랄프 파인즈, 스탠리 투치, 존 리스고, 이사벨라 로셀리니',
+INSERT INTO movie_detail VALUES (10, '에드워드 버거', '랄프 파인즈, 스탠리 투치, 존 리스고, 이사벨라 로셀리니',
 '교황의 예기치 못한 죽음 이후 새로운 교황을 선출하는 ‘콘클라베’가 시작되고,
 로렌스(랄프 파인즈)는 단장으로서 선거를 총괄하게 된다.
 한편 당선에 유력했던 후보들이 스캔들에 휘말리면서
 교활한 음모와 탐욕이 수면 위로 드러나는데…', '/previews/conclave.mp4');
 
-INSERT INTO movie_detail VALUES (46, '긴츠 질발로디스', NULL,
+INSERT INTO movie_detail VALUES (11, '긴츠 질발로디스', NULL,
 '파도가 끝나는 곳,
 고양이의 모험이 시작된다!
 
@@ -177,7 +164,7 @@ INSERT INTO movie_detail VALUES (46, '긴츠 질발로디스', NULL,
 그 안에서 골든 리트리버, 카피바라, 여우원숭이, 뱀잡이수리를 만나고
 서로의 차이점을 극복하고 팀을 이뤄 험난한 파도를 헤쳐나간다.', '/previews/flow.mp4');
 
-INSERT INTO movie_detail VALUES (47, '아담 엘리어트', '새라 스누크, 에릭 바나, 재키 위버, 코디 스밋 맥피, 도미니크 피뇽',
+INSERT INTO movie_detail VALUES (12, '아담 엘리어트', '새라 스누크, 에릭 바나, 재키 위버, 코디 스밋 맥피, 도미니크 피뇽',
 '"이제 너도 그 껍질에서 나올 차례야."
 "우린 앞을 보고 살아야 해, 꼭 기억해. 과거에 머물러 있지마"
 
@@ -190,7 +177,7 @@ INSERT INTO movie_detail VALUES (47, '아담 엘리어트', '새라 스누크, �
 계속되는 잔잔하고도 외로운 일상 속, 우연히 ‘핑키’라는 괴짜 할머니를 만나 우정을 쌓게 되고
 그레이스는 다시금 인생의 희망을 찾아가기 시작하는데…', '/previews/snail.mp4');
 
-INSERT INTO movie_detail VALUES (48, '류연수', '효우, 이민재, 이예원, 양희원',
+INSERT INTO movie_detail VALUES (13, '류연수', '효우, 이민재, 이예원, 양희원',
 '『여름, 2007』 “비밀로 할 수 있어?”
 수영을 좋아하는 소녀 ‘석영’은 물갈퀴를 가진 특별한 소년 ‘우주’를 만난다.
 ‘우주’의 물갈퀴는 ‘석영’과 ‘우주’ 둘만의 비밀이 되고, 평생 같이 수영을 하기로 약속한다.
@@ -203,35 +190,17 @@ INSERT INTO movie_detail VALUES (48, '류연수', '효우, 이민재, 이예원,
 예민한 감정 사이를 헤엄치는
 소녀와 소년의 비밀과 성장을 담은 청춘 연대기가 시작된다!', '/previews/boy.mp4');
 
-select * from movie_detail;
+select * from movie;
 
-
-CREATE TABLE review (
-    review_id NUMBER PRIMARY KEY,       -- 각 리뷰를 식별하는 ID (리뷰 번호)
-    user_id VARCHAR2(20),               -- 리뷰를 작성한 회원 ID (user 테이블 참조)
-    movie_id NUMBER,                    -- 리뷰 대상 영화 ID (movie 테이블 참조)
-    rating NUMBER(2,1),                 -- 평점 (예: 3.5, 4.0) → 소수점 1자리까지 저장
-    content VARCHAR2(1000),             -- 리뷰 텍스트 (최대 1000자)
-    review_date DATE DEFAULT SYSDATE,   -- 리뷰 작성일 (기본값: 현재 시간)
-    FOREIGN KEY (user_id) REFERENCES googv_user(id),
+CREATE TABLE movie_detail (
+    movie_id NUMBER PRIMARY KEY,
+    director VARCHAR2(100),
+    actors VARCHAR2(500), -- 쉼표로 구분된 문자열 가능
+    synopsis CLOB, -- 줄거리
+    trailer_url VARCHAR2(200), -- 예고편 영상
     FOREIGN KEY (movie_id) REFERENCES movie(movie_id)
 );
 
-CREATE SEQUENCE review_seq;
-
-INSERT INTO review VALUES (review_seq.nextval, 'gndn1234', 1, 5.0, '정말재밋어요', SYSDATE);
-INSERT INTO review VALUES (review_seq.nextval, 'gndn1234', 3, 4.0, '정말재밋어요', SYSDATE);
-INSERT INTO review VALUES (review_seq.nextval, 'gndn1234', 4, 3.0, '정말재밋어요', SYSDATE);
-INSERT INTO review VALUES (review_seq.nextval, 'gndn1234', 2, 2.0, '정말재밋어요', SYSDATE);
-INSERT INTO review VALUES (review_seq.nextval, 'gndn1234', 1, 4.9, '정말재밋어요', SYSDATE);
-select * FROM review;
-
-SELECT movie_id
-	    FROM review
-	    GROUP BY movie_id
-	    ORDER BY AVG(rating) DESC
-	    FETCH FIRST 4 ROWS ONLY;
-        
 CREATE TABLE theater (
     theater_id NUMBER PRIMARY KEY,      -- 상영관 고유 ID
     name VARCHAR2(50),                  -- 상영관 이름 (예: 1관, 2관)
@@ -249,6 +218,7 @@ INSERT INTO theater (theater_id, name, total_seats)
 VALUES (1, '1관', 32);
 INSERT INTO theater (theater_id, name, total_seats)
 VALUES (2, '2관', 32);
+
 INSERT INTO seat (seat_id, theater_id, row_label, col_number) VALUES (1, 1, 'A', 1);
 INSERT INTO seat (seat_id, theater_id, row_label, col_number) VALUES (2, 1, 'A', 2);
 INSERT INTO seat (seat_id, theater_id, row_label, col_number) VALUES (3, 1, 'A', 3);
@@ -329,6 +299,12 @@ CREATE TABLE schedule (
     FOREIGN KEY (movie_id) REFERENCES movie(movie_id),
     FOREIGN KEY (theater_id) REFERENCES theater(theater_id)
 );
+select * from schedule;
+INSERT INTO schedule VALUES (schedule_seq.nextval, 1, 1, SYSDATE - 1);
+INSERT INTO schedule VALUES (schedule_seq.nextval, 1, 1, '2025-05-29');
+INSERT INTO schedule VALUES (schedule_seq.nextval, 2, 2, '2025-05-29');
+create sequence schedule_seq;
+commit;
 CREATE TABLE reserved_seat (
     schedule_id NUMBER,
     seat_id NUMBER,
@@ -337,6 +313,7 @@ CREATE TABLE reserved_seat (
     FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id),
     FOREIGN KEY (seat_id) REFERENCES seat(seat_id)
 );
+
 CREATE TABLE reservation (
     reserve_id NUMBER PRIMARY KEY,
     user_id VARCHAR2(20),
@@ -348,24 +325,8 @@ CREATE TABLE reservation (
     FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id),
     FOREIGN KEY (seat_id) REFERENCES seat(seat_id)
 );
-SELECT * FROM movie;
-commit;
-
-SELECT 
-    m.movie_id,
-    m.director,
-    m.actors,
-    m.trailer_url,
-    AVG(r.rating) AS avg_rating
-FROM movie_detail m
-LEFT JOIN review r ON m.movie_id = r.movie_id
-WHERE m.movie_id = 1
-GROUP BY 
-    m.movie_id,
-    m.director,
-    m.actors,
-    m.trailer_url
-ORDER BY avg_rating DESC;
+INSERT INTO reservation VALUES (reserve_seq.nextval, 'gndndk12345', 4, 5, sysdate - 2, '완료');
+create sequence reserve_seq;
 
 CREATE TABLE payment (
     payment_id NUMBER PRIMARY KEY,
@@ -376,53 +337,70 @@ CREATE TABLE payment (
     pay_date DATE DEFAULT SYSDATE,
     FOREIGN KEY (user_id) REFERENCES googv_user(id)
 );
-commit;
-INSERT INTO payment (
-    payment_id,
-    user_id,
-    payment_type,
-    target_id,
-    amount,
-    pay_date
-) VALUES (
-    1,                    -- payment_id (다음 시퀀스 값 사용 시에는 시퀀스명.NEXTVAL)
-    'asdf1234',           -- 존재하는 사용자 ID
-    '예매',                -- 결제 유형: '예매' 또는 '대관', '광고'
-    101,                  -- 예약 ID 예시
-    12000,                -- 결제 금액
-    SYSDATE               -- 결제 일시 (현재 시간)
-);
-INSERT INTO payment (
-    payment_id,
-    user_id,
-    payment_type,
-    target_id,
-    amount,
-    pay_date
-) VALUES (
-    2,                    -- payment_id (다음 시퀀스 값 사용 시에는 시퀀스명.NEXTVAL)
-    'asdf1234',           -- 존재하는 사용자 ID
-    '예매',                -- 결제 유형: '예매' 또는 '대관', '광고'
-    102,                  -- 예약 ID 예시
-    15000,                -- 결제 금액
-    SYSDATE               -- 결제 일시 (현재 시간)
-);
+
+create sequence payment_seq;
+
 CREATE TABLE qna (
     qna_id NUMBER PRIMARY KEY,
     user_id VARCHAR2(20),
     title VARCHAR2(100),
     content CLOB,
     qna_date DATE DEFAULT SYSDATE,
+    
+    status VARCHAR2(10) DEFAULT '대기', -- '대기' 또는 '완료'
+    answer CLOB DEFAULT NULL,           -- 관리자의 답변 (없으면 NULL)
+    
     FOREIGN KEY (user_id) REFERENCES googv_user(id)
 );
-select * FROM googv_user;
-select * FROM payment;
-SELECT SUM(amount) AS total_amount
-	FROM payment
-	WHERE user_id = 'asdf1234';
-    commit;
-    
-    CREATE TABLE coupon (
+
+CREATE TABLE review (
+    review_id NUMBER PRIMARY KEY,       -- 각 리뷰를 식별하는 ID (리뷰 번호)
+    user_id VARCHAR2(20),               -- 리뷰를 작성한 회원 ID (user 테이블 참조)
+    movie_id NUMBER,                    -- 리뷰 대상 영화 ID (movie 테이블 참조)
+    rating NUMBER(2,1),                 -- 평점 (예: 3.5, 4.0) → 소수점 1자리까지 저장
+    content VARCHAR2(1000),             -- 리뷰 텍스트 (최대 1000자)
+    review_date DATE DEFAULT SYSDATE,   -- 리뷰 작성일 (기본값: 현재 시간)
+    FOREIGN KEY (user_id) REFERENCES googv_user(id),
+    FOREIGN KEY (movie_id) REFERENCES movie(movie_id)
+);
+
+CREATE SEQUENCE review_seq;
+
+CREATE TABLE rental (
+    rental_id NUMBER PRIMARY KEY,         -- 대관 신청 고유번호
+    user_id VARCHAR2(20),                 -- 신청한 사용자 ID
+    theater_id NUMBER,                    -- 대관하려는 상영관 ID
+    desired_datetime DATE,                -- 대관을 원하는 날짜 및 시간
+    purpose VARCHAR2(100),                -- 대관 목적 (ex: 시사회, 동호회 상영 등)
+    status VARCHAR2(20) DEFAULT '대기',   -- 신청 상태 ('대기', '승인', '반려' 등)
+    request_date DATE DEFAULT SYSDATE,    -- 신청한 날짜
+    FOREIGN KEY (user_id) REFERENCES googv_user(id),
+    FOREIGN KEY (theater_id) REFERENCES theater(theater_id)
+);
+
+create sequence rental_seq;
+
+CREATE TABLE ad ( -- 광고신청
+    ad_id NUMBER PRIMARY KEY,
+	  user_id VARCHAR2(20), 
+    title VARCHAR2(100),
+    image_url VARCHAR2(200),
+    link_url VARCHAR2(200),
+    status VARCHAR2(20) DEFAULT '대기',   -- 신청 상태 ('대기', '승인', '반려' 등),
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (user_id) REFERENCES googv_user(id)
+);
+select * from ad;
+CREATE SEQUENCE ad_seq; -- ad_id 시퀸스로 활용
+
+CREATE TABLE visit_log (
+    log_id NUMBER PRIMARY KEY,              -- 각 방문 로그를 식별하는 고유 ID
+    ip_address VARCHAR2(45),                -- 방문자의 IP 주소 (IPv6도 대응 가능)
+    visit_time DATE DEFAULT SYSDATE         -- 방문 시각 (기본값: 현재 시간)
+);
+
+CREATE TABLE coupon (
     coupon_id NUMBER PRIMARY KEY,             -- 쿠폰 고유 ID
     name VARCHAR2(50),                        -- 쿠폰 이름 (예: 20% 할인, 영화 이용권)
     description VARCHAR2(200),                -- 쿠폰 설명 (예: "모든 영화에 사용 가능")
@@ -431,6 +409,19 @@ SELECT SUM(amount) AS total_amount
     valid_days NUMBER,                        -- 발급일로부터 유효한 일 수 (예: 7일)
     use_limit NUMBER DEFAULT 1                -- 사용 가능 횟수 (기본 1회)
 );
+
+-- 1. 20% 할인 쿠폰
+INSERT INTO coupon (coupon_id, name, description, discount_type, discount_value, valid_days)
+VALUES (1, '20% 할인 쿠폰', '모든 영화에 사용 가능', '퍼센트', 20, 2);
+
+-- 2. 5,000원 할인 쿠폰
+INSERT INTO coupon (coupon_id, name, description, discount_type, discount_value, valid_days)
+VALUES (2, '5,000원 할인 쿠폰', '5천원 할인 쿠폰', '할인', 5000, 1);
+
+-- 3. 영화 1회 무료 이용권
+INSERT INTO coupon (coupon_id, name, description, discount_type, discount_value, valid_days)
+VALUES (3, '무료 이용권', '모든 영화 1인 무료 이용 가능', '이용권', 15000, 2);
+
 CREATE TABLE user_coupon (
     user_coupon_id NUMBER PRIMARY KEY,        -- 사용자 쿠폰 고유 ID
     user_id VARCHAR2(20),                     -- 쿠폰을 받은 회원 ID
@@ -441,6 +432,19 @@ CREATE TABLE user_coupon (
     FOREIGN KEY (user_id) REFERENCES googv_user(id),         -- user 테이블 참조
     FOREIGN KEY (coupon_id) REFERENCES coupon(coupon_id)    -- coupon 테이블 참조
 );
+CREATE SEQUENCE user_coupon_seq;
+CREATE TABLE faq (
+    faq_id NUMBER PRIMARY KEY,
+    title VARCHAR2(300),
+    content CLOB,
+    reg_date DATE DEFAULT SYSDATE,
+    view_count NUMBER DEFAULT 0
+);
 
-SELECT * FROM coupon;
 commit;
+select * FROM reservation;
+select * FROM user_coupon;
+update googv_user set free_spin = 100 WHERE id='gndndk12345';
+UPDATE reservation
+SET reserve_date = SYSDATE - 1
+WHERE reserve_id = 1;
