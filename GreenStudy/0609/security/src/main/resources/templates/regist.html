@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+</head>
+<body>
+<h2>회원가입</h2>
+<form action="/registProc" method="post" th:object="${memberDto}">
+    <!-- CSRF 토큰 필수 -->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+    아이디: <input type="text" th:field="*{username}" /><br>
+    비밀번호: <input type="password" th:field="*{password}" /><br>
+    이름: <input type="text" th:field="*{name}" /><br>
+    역할:
+    <select th:field="*{role}">
+        <option value="ROLE_MEMBER">MEMBER</option>
+        <option value="ROLE_ADMIN">ADMIN</option>
+    </select><br>
+    <button type="submit">가입</button>
+</form>
+</body>
+</html>

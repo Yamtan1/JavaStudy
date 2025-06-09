@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원 전용 게시판</title>
+</head>
+<body>
+<h2>회원 전용 게시판</h2>
+<p th:text="'현재 로그인 사용자: ' + ${#httpServletRequest.remoteUser}"></p>
+<a href="/success">홈으로</a>
+</body>
+</html>

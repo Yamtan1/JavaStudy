@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>로그인 성공</title>
+</head>
+<body>
+<h2>로그인 성공!</h2>
+<p>환영합니다, <b th:text="${#httpServletRequest.remoteUser}"></b>님 🎉</p>
+
+<a href="/member/home">회원 페이지</a><br>
+<a href="/admin/dashboard">관리자 페이지</a><br>
+<a href="/logout">로그아웃</a>
+</body>
+</html>
