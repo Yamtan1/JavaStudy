@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>게시판</title>
+</head>
+<body>
+
+<h2>게시글 목록</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board : ${list}">
+        <td th:text="${board.bno}"></td>
+        <td th:text="${board.title}"></td>
+        <td th:text="${board.member.id}"></td> <!-- 작성자: 연관된 member 엔티티 -->
+        <td th:text="${board.createdAt}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
