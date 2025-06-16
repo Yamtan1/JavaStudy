@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>XMLHttpRequest 로그인</title>
+</head>
+<body>
+
+<h2>로그인</h2>
+<input type="text" id="id" placeholder="아이디"><br><br>
+<input type="password" id="pw" placeholder="비밀번호"><br><br>
+<button onclick="login()">로그인</button>
+
+<p id="result"></p>
+
+<p id="info"></p>
+<button onclick="user()">유저정보확인</button>
+
+<script>
+function login() {
+    const id = document.getElementById('id').value;
+    const pw = document.getElementById('pw').value;    	
+
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        const resultEl = document.getElementById("result");
+
+        if (xhr.status === 200) {
+            resultEl.textContent = xhr.responseText;
+
+            const authHeader = xhr.getResponseHeader("userAuth");
+            if (authHeader) {
+                console.log("userAuth 헤더:", authHeader);
+                localStorage.setItem("token", authHeader);
+            }
+        } else {
+            resultEl.textContent = "로그인 실패: " + xhr.status;
+        }
+    };
+    xhr.open("POST", "/login", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    const data = JSON.stringify({ id: id, pw: pw });
+    xhr.send(data);
+}
+
+function user() {
+	const info = document.getElementById('info');
+	const token = localStorage.getItem("token");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/user", true);
+    xhr.setRequestHeader("userAuth", token); 
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            info.textContent = xhr.responseText; 
+        } else {
+        	info.textContent = "실패:" + xhr.status;
+        }
+    };
+    xhr.send();
+}
+</script>
+
+</body>
+</html>
