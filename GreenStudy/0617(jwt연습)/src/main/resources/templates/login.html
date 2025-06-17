@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>login Page</h1>
+<hr>
+<p id="loginCheck"></p>
+<input type="text" name="username" id="username"><br>
+<input type="password" name="password" id="password"><br>
+<input type="text" name="email" id="email"><br>
+<button onclick="login()">로그인</button>
+<hr>
+<button onclick="user()">유저정보확인</button>
+<p id="info"></p>
+<script>
+function login(){
+	const username = document.getElementById('username').value;
+	const password = document.getElementById('password').value;
+	const email = document.getElementById('email').value;
+	const loginCheck = document.getElementById('loginCheck'); 
+	
+	const xhr = new XMLHttpRequest()
+	xhr.onload = function() {
+		 if (xhr.status === 200) {
+	          loginCheck.innerText = '로그인 결과: ' + xhr.responseText;
+	          token = xhr.getResponseHeader("userAuth");
+	        } else {
+	          loginCheck.innerText = '요청 실패 (' + xhr.status + ')';
+	        }
+	     };
+	    xhr.open('POST', '/login');
+	  	xhr.setRequestHeader('Content-type','application/json');
+	  	xhr.send(JSON.stringify({
+	         username: username,
+	         password: password,
+	         email: email
+	    }));
+	}
+function user(){
+	const info = document.getElementById('info');
+	if (!token) {
+		info.innerText = '토큰 없음: 로그인 먼저 하세요.';
+		return;
+	}
+	const xhr = new XMLHttpRequest();
+	xhr.onload = function (){
+		if (xhr.status === 200) {
+	          info.innerText = '유저 정보: ' + xhr.responseText;
+	        } else if(xhr.status === 401){
+	          info.innerText = '요청 실패' + xhr.status + '에러' + ' 토큰 만료로 로그인 필요';
+	        }
+	     };
+	    xhr.open('GET', '/user');
+	    xhr.setRequestHeader('userAuth', token);  // 여기서 토큰을 헤더에 실어 전송
+	 	xhr.send();
+	}
+</script>
+</body>
+</html>
