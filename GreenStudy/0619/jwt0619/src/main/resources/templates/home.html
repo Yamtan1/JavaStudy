@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+</head>
+<body>
+  <h1>Home</h1>
+  <p id="user"></p>
+  <p id="exp"></p>
+  <button onclick="checkToken()">만료 여부 확인</button>
+  <button onclick="refreshToken()">AccessToken 재발급</button>
+  <p id="result"></p>
+
+  <script>
+    function parseJwt(token) {
+      try {
+        var base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+        var decoded = atob(base64);
+        return JSON.parse(decoded);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function loadTokenInfo() {
+      var token = localStorage.getItem("accessToken");
+      if (!token) {
+        document.getElementById("user").textContent = "AccessToken 없음";
+        return;
+      }
+
+      var payload = parseJwt(token);
+      if (payload) {
+        document.getElementById("user").textContent = "사용자 ID: " + (payload.sub || payload.username || payload.id);
+        document.getElementById("exp").textContent = "만료 시각: " + new Date(payload.exp * 1000).toLocaleString();
+      } else {
+        document.getElementById("user").textContent = "토큰 파싱 실패";
+      }
+    }
+
+    function checkToken() {
+      var token = localStorage.getItem("accessToken");
+      var payload = parseJwt(token);
+      if (!payload) {
+        document.getElementById("result").textContent = "토큰 파싱 실패";
+        return;
+      }
+
+      var now = Math.floor(Date.now() / 1000);
+      if (payload.exp < now) {
+        document.getElementById("result").textContent = "⚠️ AccessToken 만료됨";
+      } else {
+        document.getElementById("result").textContent = "✅ AccessToken 유효함";
+      }
+    }
+
+    function refreshToken() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:8091/api/refresh", true);
+      xhr.withCredentials = true;  // refreshToken 쿠키 포함
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var auth = xhr.getResponseHeader("Authorization");
+            if (auth && auth.startsWith("Bearer ")) {
+              var token = auth.substring(7);
+              localStorage.setItem("accessToken", token);
+              document.getElementById("result").textContent = "✅ AccessToken 재발급 성공";
+              loadTokenInfo(); // 새 토큰 정보로 갱신
+            } else {
+              document.getElementById("result").textContent = "토큰 없음";
+            }
+          } else {
+            document.getElementById("result").textContent = "❌ 재발급 실패 (" + xhr.status + ")";
+          }
+        }
+      };
+
+      xhr.send(); // body 없음
+    }
+
+    // 최초 실행
+    loadTokenInfo();
+  </script>
+</body>
+</html>

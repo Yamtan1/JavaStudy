@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <input id="id" placeholder="아이디">
+  <input id="pw" placeholder="비밀번호" type="password">
+  <button onclick="login()">로그인</button>
+  <p id="error" style="color:red;"></p>
+
+  <script>
+    function login() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:8091/api/login", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.withCredentials = true; // refreshToken 쿠키 포함
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var auth = xhr.getResponseHeader("Authorization");
+            if (auth && auth.startsWith("Bearer ")) {
+              var token = auth.substring(7);
+              localStorage.setItem("accessToken", token);
+              window.location.href = "/home"; // ✅ 이동
+            } else {
+              document.getElementById("error").textContent = "AccessToken 없음";
+            }
+          } else {
+            document.getElementById("error").textContent = "로그인 실패";
+          }
+        }
+      };
+
+      var data = {
+        id: document.getElementById("id").value,
+        pw: document.getElementById("pw").value
+      };
+      xhr.send(JSON.stringify(data));
+    }
+  </script>
+</body>
+</html>
