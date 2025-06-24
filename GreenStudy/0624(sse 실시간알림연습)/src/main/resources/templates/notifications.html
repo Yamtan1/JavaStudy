@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>알림 목록</title></head>
+<body>
+ <h2>전체 알림</h2>
+ <ul>
+   <li th:each="n : ${notifications}"
+    th:text="'🔔 ' + ${n.content} + ' (' + ${#temporals.format(n.createdAt,'yyyy-MM-dd HH:mm')} + ')'"></li>
+ </ul>
+ <a href="/home">← 홈으로</a>
+</body>
+</html>

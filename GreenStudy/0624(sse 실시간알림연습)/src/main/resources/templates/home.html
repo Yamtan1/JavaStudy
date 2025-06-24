@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="UTF-8"><title>홈</title>
+ <style>textarea{width:300px;height:80px}</style>
+</head>
+<body>
+ <h2>안녕하세요 <span th:text="${username}"></span> 님</h2>
+ <form method="post" action="/post">
+   <textarea name="content" required></textarea><br>
+   <button type="submit">글 작성</button>
+ </form>
+ <h3>알림 목록</h3>
+ <ul>
+   <li th:each="n : ${notifications}" th:text="'🔔 '+${n.content}"></li>
+ </ul>
+ <button onclick="subscribe()">실시간 알림 받기</button>
+ <a href="/notifications">🔎 모든 알림</a> | <a href="/auth/logout">로그아웃</a>
+ <script>
+   function subscribe(){
+     const sse=new EventSource('/subscribe');
+     sse.onmessage=e=>{alert('🔔 '+e.data);location.reload();};
+   }
+ </script>
+</body>
+</html>
